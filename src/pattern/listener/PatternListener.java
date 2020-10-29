@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import gov.nasa.jpf.ListenerAdapter;
 import gov.nasa.jpf.search.Search;
@@ -21,6 +23,7 @@ import pattern.entity.ReadWriteNode;
 import pattern.entity.ReadWriteNode.Type;
 import pattern.entity.ScheduleNode;
 import pattern.entity.SearchState;
+import pattern.search.PatternSearch;
 import utils.Filter;
 
 public class PatternListener extends ListenerAdapter {
@@ -31,6 +34,7 @@ public class PatternListener extends ListenerAdapter {
 	protected List<Node> currentStateNodes;
 	protected boolean isThreadChoiceSet = false;
 	protected HashMap<Integer, Integer> analyzer = new HashMap<Integer, Integer>();
+	protected Queue<SearchState> queue = new PriorityQueue<SearchState>();
 	
 	public PatternListener(Filter filter) {
 		this.filter = filter;
@@ -56,9 +60,16 @@ public class PatternListener extends ListenerAdapter {
 
 	@Override
 	public void stateAdvanced(Search search) {
+		PatternSearch pSearch = (PatternSearch) search;
+		if (pSearch.getStart() == 0) {
+			// starting gather states at the next layer
+			queue.clear();
+		}
 		int id = search.getStateId();
 		this.debug();
+		// 2do :: save to queue 
 		SearchState state = new SearchState(id, lastId, currentStateNodes);
+		queue.add(state);
 		currentStateNodes = new ArrayList<Node>();
 		lastId = id;
 	}

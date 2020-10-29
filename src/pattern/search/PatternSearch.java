@@ -1,5 +1,6 @@
 package pattern.search;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,6 +13,8 @@ import utils.Filter;
 public class PatternSearch extends Search {
 	
 	private Filter fileFilter;
+	private HashMap<Integer, Integer> analyzer = new HashMap<Integer, Integer>();
+	private int start = 0;
 	
 	public PatternSearch(Config config, VM vm) {
 		super(config, vm);
@@ -40,7 +43,8 @@ public class PatternSearch extends Search {
 	public void search() {
 		this.notifySearchStarted();
 		Queue<RestorableVMState> queue = new LinkedList<RestorableVMState>();
-		queue.offer(this.getRestorableState());
+		// initial state
+		queue.offer(this.getRestorableState());	// stateId = -1
 		this.notifyStateStored();
 		queue.offer(null);	// end of each level, we add a null element to let us know end of each level
 		while (!this.done &&
@@ -52,6 +56,9 @@ public class PatternSearch extends Search {
 				queue.offer(null);
 			} else {
 				this.restoreState(state);
+				start = 0;
+				int id = this.getStateId();
+				analyzer.put(id, analyzer.getOrDefault(id, 0) + 1);
 				this.notifyStateRestored();
 				while (!this.done &&
 						this.forward() &&
@@ -62,6 +69,7 @@ public class PatternSearch extends Search {
 						!this.isIgnoredState() &&
 						!this.isErrorState()) {
 						queue.offer(this.getRestorableState());
+						start ++;
 						this.notifyStateStored();
 					}
 					this.backtrack();
@@ -69,6 +77,11 @@ public class PatternSearch extends Search {
 			}
 		}
 		this.notifySearchFinished();
+		System.out.println(analyzer);
+	}
+	
+	public int getStart() {
+		return start;
 	}
 	
 	private void calcualteDistance(RestorableVMState state) {
