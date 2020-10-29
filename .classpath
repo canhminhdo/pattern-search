@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/javax.jms.jar"/>
 	<classpathentry kind="lib" path="lib/jdmkrt.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

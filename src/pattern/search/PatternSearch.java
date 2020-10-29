@@ -1,23 +1,26 @@
 package pattern.search;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.search.Search;
-import gov.nasa.jpf.vm.Instruction;
 import gov.nasa.jpf.vm.RestorableVMState;
-import gov.nasa.jpf.vm.Step;
-import gov.nasa.jpf.vm.ThreadInfo;
-import gov.nasa.jpf.vm.Transition;
 import gov.nasa.jpf.vm.VM;
-import gov.nasa.jpf.vm.bytecode.FieldInstruction;
+import utils.Filter;
 
 public class PatternSearch extends Search {
-
+	
+	private Filter fileFilter;
+	
 	public PatternSearch(Config config, VM vm) {
 		super(config, vm);
+		this.initialize();
+	}
+	
+	private void initialize() {
+		this.fileFilter = new Filter();
+	    this.fileFilter.createFilePathFilter();
 	}
 
 	@Override
@@ -35,38 +38,6 @@ public class PatternSearch extends Search {
 
 	@Override
 	public void search() {
-		
-		RestorableVMState state1 = this.getRestorableState();
-		// get last transition
-		Transition lastTransition = state1.getPath().getLast();
-		ThreadInfo executedThread = state1.getLastTransition().getThreadInfo();
-		
-		// one transition may have many step, each step executes an instruction
-		Iterator<Step> stepIterator = lastTransition.iterator();
-		// looping steps in an instruction
-		while (stepIterator.hasNext()) {
-			Step step = stepIterator.next();
-			// get instruction of a step
-			Instruction instr = step.getInstruction();
-			// name of the class
-			String type = instr.getClass().getName();
-			
-			
-			// get Method Info then get ClassInfo
-			instr.getMethodInfo().getClassInfo();
-			
-			
-			
-			
-			// if the instruction is either read or write instruction
-			if (instr instanceof FieldInstruction) {
-				FieldInstruction instrField = (FieldInstruction) instr;
-				// whether read or write
-				boolean isRead = instrField.isRead();
-			}
-		}
-		
-		
 		this.notifySearchStarted();
 		Queue<RestorableVMState> queue = new LinkedList<RestorableVMState>();
 		queue.offer(this.getRestorableState());
@@ -98,6 +69,82 @@ public class PatternSearch extends Search {
 			}
 		}
 		this.notifySearchFinished();
+	}
+	
+	private void calcualteDistance(RestorableVMState state) {
+//		Sequence seq = new Sequence();
+//		// get last transition
+//		Transition lastTransition = state.getPath().getLast();
+//		ChoiceGenerator<?> currentCG = lastTransition.getChoiceGenerator();
+//		// only concern about Thread Choices
+//		if (currentCG instanceof ThreadChoiceFromSet) {
+//			ThreadInfo[] threads = ((ThreadChoiceFromSet)currentCG).getAllThreadChoices();
+//            if (threads.length == 1) {
+//            	// we do not need to check this
+//                return;
+//            }
+//            ThreadInfo ti = state.getLastTransition().getThreadInfo();
+//            Instruction insn = ti.getPC();
+//            String threadClassName = insn.getClass().getName();
+//            ScheduleNode node = new ScheduleNode(1, ti.getId(), ti.getName(), insn.getFileLocation(), threadClassName);
+//
+//            // add schedule node to the sequence
+//            seq.add(node);
+//            
+//            // add read OR write nodes to the sequence
+//            // one transition may have many step, each step executes an instruction
+//    		Iterator<Step> stepIterator = lastTransition.iterator();
+//    		// looping steps in an instruction
+//    		while (stepIterator.hasNext()) {
+//    			Step step = stepIterator.next();
+//    			// get instruction of a step
+//    			Instruction instr = step.getInstruction();
+//    			String sourceFileName = instr.getMethodInfo().getClassInfo().getSourceFileName();
+//    			if (this.fileFilter.containsFile(sourceFileName)) {
+//    				// name of the class
+//        			String instrClassName = instr.getClass().getName();
+//        			// get Method Info then get ClassInfo
+//        			instr.getMethodInfo().getClassInfo();
+//        			
+//        			// if the instruction is either read or write instruction
+//        			if (instr instanceof FieldInstruction) {
+//        				FieldInstruction instrField = (FieldInstruction) instr;
+//        				// whether read or write
+//        				FieldInfo fi = instrField.getFieldInfo();
+//        	            ElementInfo ei = instrField.getElementInfo(ti);
+//
+//        	            TYPE type = instrField.isRead() ? TYPE.READ : TYPE.WRITE;
+//        	            String eiString = ei == null ? "null" : ei.toString();
+//        	            String fiName = fi.getName();
+//        	            ReadWriteNode rwNode = new ReadWriteNode(1, eiString, fiName, type, node, instrField.getFileLocation());
+//        				seq.add(rwNode);
+//        			}
+//    			}
+//    		}
+//    		System.out.println(seq);
+//		}
+		
+		
+//		// one transition may have many step, each step executes an instruction
+//		Iterator<Step> stepIterator = lastTransition.iterator();
+//		// looping steps in an instruction
+//		while (stepIterator.hasNext()) {
+//			Step step = stepIterator.next();
+//			// get instruction of a step
+//			Instruction instr = step.getInstruction();
+//			// name of the class
+//			String type = instr.getClass().getName();
+//			
+//			// get Method Info then get ClassInfo
+//			instr.getMethodInfo().getClassInfo();
+//			
+//			// if the instruction is either read or write instruction
+//			if (instr instanceof FieldInstruction) {
+//				FieldInstruction instrField = (FieldInstruction) instr;
+//				// whether read or write
+//				boolean isRead = instrField.isRead();
+//			}
+//		}
 	}
 
 	@Override
