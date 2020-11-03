@@ -47,6 +47,7 @@ public class TestRace1 {
         Thread t2 = new Thread() {
             public void run() {
                 x = x + 17;
+                y = 3;
                 z=0;
                 list.add(1);
             }
