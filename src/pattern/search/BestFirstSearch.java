@@ -26,18 +26,12 @@ import utils.Filter;
 public class BestFirstSearch extends SimplePriorityHeuristic {
 	
 	Filter filter;
-	int id = 0;
 	protected HashMap<Integer, Integer> analyzer = new HashMap<Integer, Integer>();
 	
 	public BestFirstSearch (Config config, VM vm) {    
 		  	super(config,vm);
-		  	Search.log.info("Best First Search");
 		  	filter = new Filter();
 		  	filter.createFilePathFilter();
-	}
-	
-	public int getNodeId() {
-		return id ++;
 	}
 
 	@Override
@@ -63,10 +57,9 @@ public class BestFirstSearch extends SimplePriorityHeuristic {
 					if (filter != null && !filter.containsFile(sourceFileName)) {
 						continue;
 					}
-					
 					FieldInfo fi = fins.getFieldInfo();
-					ElementInfo ei = fins.getLastElementInfo();
-//					ElementInfo ei = fins.getElementInfo(ti);
+					ElementInfo ei = fins.getLastElementInfo();	// the object which property belongs to
+					// ElementInfo ei = fins.getElementInfo(ti); // this seems not correct
 					Type type = fins.isRead() ? Type.READ : Type.WRITE;
 					String eiString = ei == null ? "null" : ei.toString();
 					String fiName = fi.getName();
@@ -86,7 +79,7 @@ public class BestFirstSearch extends SimplePriorityHeuristic {
 		// default heuristic value
 		// int priority = vm.getPathLength();
 
-		return - priority;
+		return -priority;
 	}
 	
 	public ElementInfo getElementInfo(FieldInfo fi, ThreadInfo ti) {

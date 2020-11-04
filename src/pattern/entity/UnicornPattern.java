@@ -41,7 +41,9 @@ public class UnicornPattern implements Pattern {
 			if (pattern11(list.get(0), list.get(1), list.get(2), list.get(3))) {
 				return new UnicornPattern(p1, p2, list, UnicornType.P11);
 			}
-			
+		}
+		
+		if (p1.isWriteRead() && p2.isReadWrite()) {
 			if (pattern12(list.get(0), list.get(1), list.get(2), list.get(3))) {
 				return new UnicornPattern(p1, p2, list, UnicornType.P12);
 			}
@@ -50,6 +52,12 @@ public class UnicornPattern implements Pattern {
 				return new UnicornPattern(p1, p2, list, UnicornType.P13);
 			}
 			
+			if (pattern17(list.get(0), list.get(1), list.get(2), list.get(3))) {
+				return new UnicornPattern(p1, p2, list, UnicornType.P17);
+			}
+		}
+		
+		if (p1.isReadWrite() && p2.isWriteRead()) {
 			if (pattern14(list.get(0), list.get(1), list.get(2), list.get(3))) {
 				return new UnicornPattern(p1, p2, list, UnicornType.P14);
 			}
@@ -61,11 +69,8 @@ public class UnicornPattern implements Pattern {
 			if (pattern16(list.get(0), list.get(1), list.get(2), list.get(3))) {
 				return new UnicornPattern(p1, p2, list, UnicornType.P16);
 			}
-			
-			if (pattern17(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P17);
-			}
 		}
+		
 		return null;
 	}
 
@@ -161,6 +166,10 @@ public class UnicornPattern implements Pattern {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean isType(UnicornType type) {
+		return this.type == type;
 	}
 	
 	@Override

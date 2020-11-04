@@ -20,6 +20,7 @@ public class FalconPattern implements Pattern {
 	}
 
 	public static FalconPattern match(PairPattern p1, PairPattern p2) {
+		// PairPattern must be same memory access
 		if (p1.getValue().equals(p2.getKey()) &&
 			p1.getKey().getThread().equals(p2.getValue().getThread())) {
 			
@@ -40,6 +41,10 @@ public class FalconPattern implements Pattern {
 			}
 		}
 		return null;
+	}
+	
+	public boolean isType(FalconType type) {
+		return this.type == type; 
 	}
 	
 	public List<Node> getList() {

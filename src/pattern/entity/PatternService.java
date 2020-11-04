@@ -33,7 +33,6 @@ public class PatternService {
 		pSet.addAll(orderedPairs);
 		Set<Pattern> cSet = this.complexPattern(orderedPairs);
 		pSet.addAll(cSet);
-//		System.out.println("NumPairs = " + pSet.size() + " " + pSet);
 		return pSet.size();
 	}
 	
@@ -57,29 +56,30 @@ public class PatternService {
 		return pSet;
 	}
 	
-	public void makePattern(PairPattern p1, PairPattern p2) {
-		
-	}
-
 	public List<PairPattern> matchingPairs() {
-		Iterator<Node> list = seq.iterator();
-		HashMap<String, List<Node>> map = new HashMap<String, List<Node>>();
-		while (list.hasNext()) {
-			Node node = list.next();
-			String key = node.getIdentity();
-			if (map.containsKey(key)) {
-				map.get(key).add(node);
-			} else {
-				map.put(key, new ArrayList<Node>(Arrays.asList(node)));
-			}
-		}
+		HashMap<String, List<Node>> streams = streamAccess();
 		List<PairPattern> orderedPairs = new ArrayList<PairPattern>();
-		for (Entry<String, List<Node>> e : map.entrySet()) {
+		for (Entry<String, List<Node>> e : streams.entrySet()) {
             List<PairPattern> pairList = findPair(e.getValue());
             orderedPairs.addAll(pairList);
 		}
 		Collections.sort(orderedPairs);
 		return orderedPairs;
+	}
+
+	public HashMap<String, List<Node>> streamAccess() {
+		Iterator<Node> list = seq.iterator();
+		HashMap<String, List<Node>> streams = new HashMap<String, List<Node>>();
+		while (list.hasNext()) {
+			Node node = list.next();
+			String key = node.getIdentity();
+			if (streams.containsKey(key)) {
+				streams.get(key).add(node);
+			} else {
+				streams.put(key, new ArrayList<Node>(Arrays.asList(node)));
+			}
+		}
+		return streams;
 	}
 	
 	public List<PairPattern> findPair(List<Node> seq) {
@@ -109,7 +109,7 @@ public class PatternService {
 			if (!list.hasNext()) {
 				pairList.addAll(extractPairFromWindow(window));
 			}
-			assert window.size() <= pairWinSize : "Window size for matchig pair is incorrect";
+			assert window.size() <= pairWinSize : "Window size for matching pair is incorrect";
 		}
 		return pairList;
 	}
