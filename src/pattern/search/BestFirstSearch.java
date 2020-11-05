@@ -1,12 +1,10 @@
 package pattern.search;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import gov.nasa.jpf.Config;
-import gov.nasa.jpf.search.Search;
 import gov.nasa.jpf.search.heuristic.SimplePriorityHeuristic;
 import gov.nasa.jpf.vm.ChoiceGenerator;
 import gov.nasa.jpf.vm.ElementInfo;
@@ -26,7 +24,6 @@ import utils.Filter;
 public class BestFirstSearch extends SimplePriorityHeuristic {
 	
 	Filter filter;
-	protected HashMap<Integer, Integer> analyzer = new HashMap<Integer, Integer>();
 	
 	public BestFirstSearch (Config config, VM vm) {    
 		  	super(config,vm);
@@ -65,10 +62,8 @@ public class BestFirstSearch extends SimplePriorityHeuristic {
 					String fiName = fi.getName();
 					Node node = new Node(currentCG.getStateId(), ti.getName(), instr.getClass().getName(), eiString, fiName, type, fins.getFileLocation());
 					node.setIndex(count ++);
-					list.add(node);
+					seq.add(node);
 				}
-				analyzer.put(list.size(), analyzer.getOrDefault(list.size(), 0) + 1);
-				seq.addAll(list);
 			}
 		}
 		
@@ -93,7 +88,6 @@ public class BestFirstSearch extends SimplePriorityHeuristic {
 		while (list.hasNext()) {
 			System.out.println(list.next());
 		}
-		System.out.println(analyzer);
 		System.out.println("----------------------------");
 	}
 }

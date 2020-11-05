@@ -2,6 +2,7 @@ package pattern.listener;
 
 import gov.nasa.jpf.ListenerAdapter;
 import gov.nasa.jpf.search.Search;
+import pattern.search.BestFirstSearch;
 
 public class AnalyzerListener extends ListenerAdapter {
 	
@@ -24,5 +25,6 @@ public class AnalyzerListener extends ListenerAdapter {
 	@Override
 	public void searchFinished(Search search) {
 		System.out.println("P-Measure = " + count);
+		System.out.println("Queue size = " + ((BestFirstSearch)search).getQueueSize());
 	}
 }
