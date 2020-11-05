@@ -24,7 +24,7 @@ public class Checker {
 //		String testFileName = "reorder.ReorderTest"; // P = 4, 0s
 //		String testFileName = "SimpleTest.Main"; // P = 5, 0s
 //		String testFileName = "twoStage.Main"; // P = 26, 0s
-//		String testFileName = "org.apache.log4j.TestThrowableStrRep"; // P = 5, cannot detect bug
+//		String testFileName = "org.apache.log4j.TestThrowableStrRep"; // P = 5, 15s cannot detect bug
 		String testFileName = "wronglock2.Main"; // P = 11, 0s
         String[] str = new String[]{
             "+search.class=pattern.search.BestFirstSearch",
