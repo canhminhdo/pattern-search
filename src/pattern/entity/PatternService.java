@@ -36,6 +36,21 @@ public class PatternService {
 		return pSet.size();
 	}
 	
+	public int getScore(Set<Pattern> patterns) {
+		// calculating the score with different important rates.
+		int score = 0;
+		for (Pattern p : patterns) {
+	        if (p instanceof PairPattern) {
+	        	score += 1;
+	        	continue;
+	        }
+	        if (p instanceof UnicornPattern || p instanceof FalconPattern) {
+	        	score += 2;
+	        }
+		}
+		return score;
+	}
+	
 	public Set<Pattern> complexPattern(List<PairPattern> orderedPairs) {
 		Set<Pattern> pSet = new HashSet<Pattern>();
 		int n = orderedPairs.size();
