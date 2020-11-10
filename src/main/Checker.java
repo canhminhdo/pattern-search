@@ -8,7 +8,7 @@ public class Checker {
 	
 	public static void main(String[] args) {
 //		String testFileName = "TestRace1";
-//		String testFileName = "account.Main"; // P = 0, 14	s
+		String testFileName = "account.Main"; // P = 0, 14s
 //		String testFileName = "airline.Main"; // P = 0, 1s
 //		String testFileName = "alarmclock.AlarmClock"; // P = 0, 1s
 //		String testFileName = "allocationvector.TestCase"; // P = 0, 1s
@@ -31,9 +31,10 @@ public class Checker {
 //		String testFileName = "mutual_exclusion.Lamport";
 //		String testFileName = "mutual_exclusion.Peterson";
 //		String testFileName = "pipeline.PipeInttest"; // P = 0, 0s, Q = 256, should ignore
-		String testFileName = "readerswriters.RWVSNTest"; // P = 0, 0s
+//		String testFileName = "readerswriters.RWVSNTest"; // P = 0, 0s
         String[] str = new String[]{
             "+search.class=pattern.search.BestFirstSearch",
+//        	"+search.class=gov.nasa.jpf.search.heuristic.BFSHeuristic",
             testFileName};
 	    Config config = new Config(str);
         JPF jpf = new JPF(config);
