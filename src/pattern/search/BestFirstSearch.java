@@ -69,7 +69,7 @@ public class BestFirstSearch extends SimplePriorityHeuristic {
 		
 //		this.debug(seq);
 		PatternService cal = new PatternService(config, seq);
-		int priority = cal.getPatterns();
+		int priority = cal.getNumPatterns();
 		
 		// default heuristic value
 		// int priority = vm.getPathLength();

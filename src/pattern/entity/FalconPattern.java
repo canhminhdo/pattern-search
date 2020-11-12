@@ -3,17 +3,13 @@ package pattern.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FalconPattern implements Pattern {
-	
-	public enum FalconType {
-		P4, P5, P6, P7, P8
-	}
+public class FalconPattern extends Pattern {
 	
 	private PairPattern p1;
 	private PairPattern p2;
-	private FalconType type;
+	private PatternType type;
 	
-	private FalconPattern(PairPattern p1, PairPattern p2, FalconType type) {
+	private FalconPattern(PairPattern p1, PairPattern p2, PatternType type) {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.type = type;
@@ -25,25 +21,25 @@ public class FalconPattern implements Pattern {
 			p1.getKey().getThread().equals(p2.getValue().getThread())) {
 			
 			if (p1.isReadWrite() && p2.isWriteRead()) {
-				return new FalconPattern(p1, p2, FalconType.P4);
+				return new FalconPattern(p1, p2, PatternType.P4);
 			}
 			if (p1.isWriteWrite() && p2.isWriteRead()) {
-				return new FalconPattern(p1, p2, FalconType.P5);
+				return new FalconPattern(p1, p2, PatternType.P5);
 			}
 			if (p1.isWriteRead() && p2.isReadWrite()) {
-				return new FalconPattern(p1, p2, FalconType.P6);
+				return new FalconPattern(p1, p2, PatternType.P6);
 			}
 			if (p1.isReadWrite() && p2.isWriteWrite()) {
-				return new FalconPattern(p1, p2, FalconType.P7);
+				return new FalconPattern(p1, p2, PatternType.P7);
 			}
 			if (p1.isWriteWrite() && p2.isWriteWrite()) {
-				return new FalconPattern(p1, p2, FalconType.P8);
+				return new FalconPattern(p1, p2, PatternType.P8);
 			}
 		}
 		return null;
 	}
 	
-	public boolean isType(FalconType type) {
+	public boolean isType(PatternType type) {
 		return this.type == type; 
 	}
 	
@@ -58,5 +54,10 @@ public class FalconPattern implements Pattern {
 	@Override
 	public String toString() {
 		return "FalconPattern [type=" + type + ", list=" + getList() + "]";
+	}
+
+	@Override
+	public PatternType getPatternType() {
+		return this.type;
 	}
 }

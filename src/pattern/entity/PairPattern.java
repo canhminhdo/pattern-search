@@ -1,35 +1,32 @@
 package pattern.entity; 
 
-public class PairPattern implements Pattern, Comparable<PairPattern> {
-	
-	public enum PairType {
-		P1, P2, P3
-	}
+public class PairPattern extends Pattern implements Comparable<PairPattern> {
 	
 	private Node key;
 	private Node value;
-	private PairType type;
+	private PatternType type;
 	
-	private PairPattern(Node key, Node value, PairType type) {
+	private PairPattern(Node key, Node value, PatternType type) {
 		this.key = key;
 		this.value = value;
 		this.type = type;
 	}
 	
-	public PairType getPairType() {
+	@Override
+	public PatternType getPatternType() {
 		return type;
 	}
 	
 	public boolean isReadWrite() {
-		return type == PairType.P1;
+		return type == PatternType.P1;
 	}
 	
 	public boolean isWriteRead() {
-		return type == PairType.P2;
+		return type == PatternType.P2;
 	}
 	
 	public boolean isWriteWrite() {
-		return type == PairType.P3;
+		return type == PatternType.P3;
 	}
 	
 	public Node getKey() {
@@ -56,15 +53,15 @@ public class PairPattern implements Pattern, Comparable<PairPattern> {
 	public static PairPattern match(Node node1, Node node2) {
 		
 		if (node1.isRead() && node2.isWrite()) {
-			return new PairPattern(node1, node2, PairType.P1);
+			return new PairPattern(node1, node2, PatternType.P1);
 		}
 		
 		if (node1.isWrite() && node2.isRead()) {
-			return new PairPattern(node1, node2, PairType.P2);
+			return new PairPattern(node1, node2, PatternType.P2);
 		}
 		
 		if (node1.isWrite() && node2.isWrite()) {
-			return new PairPattern(node1, node2, PairType.P3);
+			return new PairPattern(node1, node2, PatternType.P3);
 		}
 		
 		assert !node1.getThread().equals(node2.getThread()) : node1.toString() + node2.toString();

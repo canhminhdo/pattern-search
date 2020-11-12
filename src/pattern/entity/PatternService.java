@@ -27,13 +27,18 @@ public class PatternService {
 		patternWinSize = config.getInt("search.heuristic.patternWinSize", 4);
 	}
 	
-	public int getPatterns() {
+	public int getNumPatterns() {
+		Set<Pattern> pSet = getPatterns(); 
+		return pSet.size();
+	}
+	
+	public Set<Pattern> getPatterns() {
 		List<PairPattern> orderedPairs = this.matchingPairs();
 		Set<Pattern> pSet = new HashSet<Pattern>();
 		pSet.addAll(orderedPairs);
 		Set<Pattern> cSet = this.complexPattern(orderedPairs);
 		pSet.addAll(cSet);
-		return pSet.size();
+		return pSet;
 	}
 	
 	public int getScore(Set<Pattern> patterns) {

@@ -1,15 +1,13 @@
 package pattern.entity;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import pattern.entity.FalconPattern.FalconType;
 import pattern.entity.Node.Type;
+import pattern.entity.Pattern.PatternType;
 
 class FalconPatternTest {
 
@@ -38,7 +36,7 @@ class FalconPatternTest {
 		PairPattern p2 = PairPattern.match(n2, n3);
 		FalconPattern f = FalconPattern.match(p1, p2);
 		assert f != null;
-		assert f.isType(FalconType.P4);
+		assert f.isType(PatternType.P4);
 	}
 	
 	@Test
@@ -61,7 +59,7 @@ class FalconPatternTest {
 		PairPattern p2 = PairPattern.match(n2, n3);
 		FalconPattern f = FalconPattern.match(p1, p2);
 		assert f != null;
-		assert f.isType(FalconType.P5);
+		assert f.isType(PatternType.P5);
 	}
 	
 	@Test
@@ -96,7 +94,7 @@ class FalconPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		FalconPattern f = FalconPattern.match(p1, p2);
 		assert f != null;
-		assert f.isType(FalconType.P5);
+		assert f.isType(PatternType.P5);
 	}
 	
 	@Test
@@ -120,7 +118,7 @@ class FalconPatternTest {
 		PairPattern p2 = PairPattern.match(n2, n3);
 		FalconPattern f = FalconPattern.match(p1, p2);
 		assert f != null;
-		assert f.isType(FalconType.P6);
+		assert f.isType(PatternType.P6);
 	}
 	
 	@Test
@@ -143,7 +141,7 @@ class FalconPatternTest {
 		PairPattern p2 = PairPattern.match(n2, n3);
 		FalconPattern f = FalconPattern.match(p1, p2);
 		assert f != null;
-		assert f.isType(FalconType.P7);
+		assert f.isType(PatternType.P7);
 	}
 	
 	@Test
@@ -166,7 +164,7 @@ class FalconPatternTest {
 		PairPattern p2 = PairPattern.match(n2, n3);
 		FalconPattern f = FalconPattern.match(p1, p2);
 		assert f != null;
-		assert f.isType(FalconType.P8);
+		assert f.isType(PatternType.P8);
 	}
 	
 	@Test

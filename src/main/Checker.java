@@ -7,35 +7,44 @@ import pattern.listener.AnalyzerListener;
 public class Checker {
 	
 	public static void main(String[] args) {
-//		String testFileName = "TestRace1";
-		String testFileName = "account.Main"; // P = 0, 14s
-//		String testFileName = "airline.Main"; // P = 0, 1s
-//		String testFileName = "alarmclock.AlarmClock"; // P = 0, 1s
-//		String testFileName = "allocationvector.TestCase"; // P = 0, 1s
-//		String testFileName = "atmoerror.Main"; // P = 0, 0s
-//		String testFileName = "CheckField"; // P = 3, 0s
-//		String testFileName = "consisitency.Main"; // P = 6, 0s
-//		String testFileName = "critical.Critical"; // P = 0, 0s
-//		String testFileName = "datarace.Main"; // P = 2, 0s
-//		String testFileName = "even.Main"; // P = 0, 0s
-//		String testFileName = "linkedlist.BugTester"; // P = 2, 0s
-//		String testFileName = "mergesort.MergeSort"; // P = 0, 28s
-//		String testFileName = "producerConsumer.ProducerConsumer"; // P = 0, 6s
-//		String testFileName = "reorder.ReorderTest"; // P = 4, 0s
-//		String testFileName = "SimpleTest.Main"; // P = 5, 0s
-//		String testFileName = "twoStage.Main"; // P = 26, 0s
-//		String testFileName = "org.apache.log4j.TestThrowableStrRep"; // P = 5, ??? need to measure
-//		String testFileName = "wronglock2.Main"; // P = 11, 0s
-//		String testFileName = "mutual_exclusion.Bakery";
-//		String testFileName = "mutual_exclusion.Dekker";
-//		String testFileName = "mutual_exclusion.Lamport";
-//		String testFileName = "mutual_exclusion.Peterson";
-//		String testFileName = "pipeline.PipeInttest"; // P = 0, 0s, Q = 256, should ignore
-//		String testFileName = "readerswriters.RWVSNTest"; // P = 0, 0s
+		int idx = 0;
+		if (args.length > 0) {
+			idx = Integer.parseInt(args[0]);
+		}
+		String[] programs = new String[] {
+			"TestRace1", // 0
+			"account.Main", // 1
+			"airline.Main", // 2
+			"alarmclock.AlarmClock", // 3
+			"allocationvector.TestCase", // 4
+			"atmoerror.Main", // 5
+			"CheckField", // 6
+			"consisitency.Main", // 7
+			"critical.Critical", // 8
+			"datarace.Main", // 9
+			"even.Main", // 10
+			"linkedlist.BugTester", // 11
+			"mergesort.MergeSort", // 12
+			"producerConsumer.ProducerConsumer", // 13
+			"reorder.ReorderTest", // 14
+			"SimpleTest.Main", // 15
+			"twoStage.Main", // 16
+			"org.apache.log4j.TestThrowableStrRep", // 17
+			"wronglock2.Main", // 18
+			"mutual_exclusion.Bakery", // 19
+			"mutual_exclusion.Dekker", // 20
+			"mutual_exclusion.Lamport", // 21
+			"mutual_exclusion.Peterson", // 22
+			"pipeline.PipeInttest", // 23
+			"readerswriters.RWVSNTest" // 24
+		};
+		
         String[] str = new String[]{
-            "+search.class=pattern.search.BestFirstSearch",
-//        	"+search.class=gov.nasa.jpf.search.heuristic.BFSHeuristic",
-            testFileName};
+            "+search.class=pattern.search.MCSearch",
+//            "+search.class=pattern.search.BMCSearch",
+//    		"+search.class=gov.nasa.jpf.search.heuristic.BFSHeuristic",
+//            "+search.class=pattern.search.BestFirstSearch",
+        	programs[idx]};
 	    Config config = new Config(str);
         JPF jpf = new JPF(config);
         AnalyzerListener listener = new AnalyzerListener();

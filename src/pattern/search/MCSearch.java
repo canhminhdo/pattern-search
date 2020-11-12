@@ -1,13 +1,10 @@
-package pattern.listener;
+package pattern.search;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-import gov.nasa.jpf.ListenerAdapter;
-import gov.nasa.jpf.search.Search;
+import gov.nasa.jpf.Config;
 import gov.nasa.jpf.vm.ChoiceGenerator;
 import gov.nasa.jpf.vm.ElementInfo;
 import gov.nasa.jpf.vm.FieldInfo;
@@ -19,33 +16,16 @@ import gov.nasa.jpf.vm.VM;
 import gov.nasa.jpf.vm.bytecode.FieldInstruction;
 import gov.nasa.jpf.vm.choice.ThreadChoiceFromSet;
 import pattern.entity.Node;
-import pattern.entity.Node.Type;
-import pattern.entity.Pattern;
-import pattern.entity.Pattern.PatternType;
 import pattern.entity.PatternService;
-import utils.Filter;
+import pattern.entity.Node.Type;
 
-public class AnalyzerListener extends ListenerAdapter {
+public class MCSearch extends SimplePriorityHeuristic {
 	
-	int count;
-	Filter filter;
-	
-	public AnalyzerListener() {
-		filter = new Filter();
-		filter.createFilePathFilter();
+	public MCSearch(Config config, VM vm) {
+		super(config, vm);
 	}
 
-	@Override
-	public void stateAdvanced(Search search) {
-		if (search.isEndState()) {
-			count ++;
-		}
-	}
-	
-	@Override
-	public void propertyViolated(Search search) {
-		System.out.println("Violated at state ID = " + search.getStateId() + ", Depth = " + search.getDepth());
-		VM vm = search.getVM();
+	public int computeHeuristicValue() {
 		Path path = vm.getPath();
 		Iterator<Transition> listTransition = path.iterator();
 		List<Node> seq = new ArrayList<Node>();
@@ -80,29 +60,10 @@ public class AnalyzerListener extends ListenerAdapter {
 				}
 			}
 		}
-//		System.out.println(seq);
-		PatternService cal = new PatternService(search.getConfig(), seq);
-		Set<Pattern> pSet = cal.getPatterns();
-		analyzePatterns(pSet);
-	}
-	
-	private void analyzePatterns(Set<Pattern> pSet) {
-		HashMap<PatternType, Integer> analyzer = new HashMap<PatternType, Integer>();
-		for (Pattern p : pSet) {
-			analyzer.put(p.getPatternType(), analyzer.getOrDefault(p.getPatternType(), 0) + 1);
-		}
-		System.out.println(analyzer);
-	}
 
-	@Override
-	public void searchStarted(Search search) {
-		count = 0;
-	}
+		PatternService cal = new PatternService(config, seq);
+		int priority = cal.getNumPatterns();
 
-	@Override
-	public void searchFinished(Search search) {
-//		System.out.println("P-Measure = " + count);
-//		System.out.println("Queue size = " + ((MCSearch)search).getQueueSize());
-//		System.out.println("Child queue size = " + ((MCSearch)search).getChildQueueSize());
+		return -priority;
 	}
 }

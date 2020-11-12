@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UnicornPattern implements Pattern {
-
-	public enum UnicornType {
-		P9, P10, P11, P12, P13, P14, P15, P16, P17
-	}
+public class UnicornPattern extends Pattern {
 
 	private PairPattern p1;
 	private PairPattern p2;
 	private List<Node> list;
-	private UnicornType type;
+	private PatternType type;
 	
-	public UnicornPattern(PairPattern p1, PairPattern p2, List<Node> list, UnicornType type) {
+	public UnicornPattern(PairPattern p1, PairPattern p2, List<Node> list, PatternType type) {
 		this.p1 = p1;
 		this.p2 = p2;
 		this.list = list;
@@ -32,42 +28,42 @@ public class UnicornPattern implements Pattern {
 		
 		if (p1.isWriteWrite() && p2.isWriteWrite()) {
 			if (pattern9(list.get(0), list.get(1), list.get(2), list.get(3)))
-				return new UnicornPattern(p1, p2, list, UnicornType.P9);
+				return new UnicornPattern(p1, p2, list, PatternType.P9);
 			
 			if (pattern10(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P10);
+				return new UnicornPattern(p1, p2, list, PatternType.P10);
 			}
 			
 			if (pattern11(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P11);
+				return new UnicornPattern(p1, p2, list, PatternType.P11);
 			}
 		}
 		
 		if (p1.isWriteRead() && p2.isReadWrite()) {
 			if (pattern12(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P12);
+				return new UnicornPattern(p1, p2, list, PatternType.P12);
 			}
 			
 			if (pattern13(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P13);
+				return new UnicornPattern(p1, p2, list, PatternType.P13);
 			}
 			
 			if (pattern17(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P17);
+				return new UnicornPattern(p1, p2, list, PatternType.P17);
 			}
 		}
 		
 		if (p1.isReadWrite() && p2.isWriteRead()) {
 			if (pattern14(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P14);
+				return new UnicornPattern(p1, p2, list, PatternType.P14);
 			}
 			
 			if (pattern15(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P15);
+				return new UnicornPattern(p1, p2, list, PatternType.P15);
 			}
 			
 			if (pattern16(list.get(0), list.get(1), list.get(2), list.get(3))) {
-				return new UnicornPattern(p1, p2, list, UnicornType.P16);
+				return new UnicornPattern(p1, p2, list, PatternType.P16);
 			}
 		}
 		
@@ -168,12 +164,17 @@ public class UnicornPattern implements Pattern {
 		return false;
 	}
 	
-	public boolean isType(UnicornType type) {
+	public boolean isType(PatternType type) {
 		return this.type == type;
 	}
 	
 	@Override
 	public String toString() {
 		return "UnicornPattern [type=" + type+ ", list=" + list + "]";
+	}
+
+	@Override
+	public PatternType getPatternType() {
+		return this.type;
 	}
 }

@@ -1,16 +1,13 @@
 package pattern.entity;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import pattern.entity.FalconPattern.FalconType;
 import pattern.entity.Node.Type;
-import pattern.entity.UnicornPattern.UnicornType;
+import pattern.entity.Pattern.PatternType;
 
 class UnicornPatternTest {
 
@@ -40,7 +37,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P9);
+		assert p.isType(PatternType.P9);
 	}
 	
 	@Test
@@ -53,7 +50,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P9);
+		assert p.isType(PatternType.P9);
 	}
 	
 	@Test
@@ -78,7 +75,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P10);
+		assert p.isType(PatternType.P10);
 	}
 	
 	@Test
@@ -91,7 +88,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P10);
+		assert p.isType(PatternType.P10);
 	}
 	
 	@Test
@@ -116,7 +113,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P11);
+		assert p.isType(PatternType.P11);
 	}
 	
 	@Test
@@ -129,7 +126,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P11);
+		assert p.isType(PatternType.P11);
 	}
 	
 	@Test
@@ -154,7 +151,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P12);
+		assert p.isType(PatternType.P12);
 	}
 	
 	@Test
@@ -167,7 +164,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P12);
+		assert p.isType(PatternType.P12);
 	}
 	
 	@Test
@@ -192,7 +189,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P13);
+		assert p.isType(PatternType.P13);
 	}
 	
 	@Test
@@ -205,7 +202,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P13);
+		assert p.isType(PatternType.P13);
 	}
 	
 	@Test
@@ -230,7 +227,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P14);
+		assert p.isType(PatternType.P14);
 	}
 	
 	@Test
@@ -243,7 +240,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P14);
+		assert p.isType(PatternType.P14);
 	}
 	
 	@Test
@@ -268,7 +265,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P15);
+		assert p.isType(PatternType.P15);
 	}
 	
 	@Test
@@ -281,7 +278,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P15);
+		assert p.isType(PatternType.P15);
 	}
 	
 	@Test
@@ -306,7 +303,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P16);
+		assert p.isType(PatternType.P16);
 	}
 	
 	@Test
@@ -319,7 +316,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P16);
+		assert p.isType(PatternType.P16);
 	}
 	
 	@Test
@@ -344,7 +341,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P17);
+		assert p.isType(PatternType.P17);
 	}
 	
 	@Test
@@ -357,7 +354,7 @@ class UnicornPatternTest {
 		PairPattern p2 = PairPattern.match(n3, n4);
 		UnicornPattern p = UnicornPattern.match(p1, p2);
 		assert p != null;
-		assert p.isType(UnicornType.P17);
+		assert p.isType(PatternType.P17);
 	}
 	
 	@Test
